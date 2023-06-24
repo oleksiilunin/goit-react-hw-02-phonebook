@@ -1,4 +1,4 @@
-const ContactsList = ({ contacts }) => {
+const ContactsList = ({ contacts, onDeleteContact }) => {
   const sortedList = contacts.sort((firstContact, secondContact) =>
     firstContact.name
       .toLowerCase()
@@ -11,6 +11,9 @@ const ContactsList = ({ contacts }) => {
           <p>
             {name}: <span>{number}</span>
           </p>
+          <button type="button" onClick={() => onDeleteContact(id)}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>
