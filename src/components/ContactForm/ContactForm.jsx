@@ -7,7 +7,7 @@ const initialValues = {
 };
 const ContactForm = ({ onAddContact }) => {
   const handleSubmit = (values, { resetForm }) => {
-    onAddContact({ id: nanoid, ...values });
+    onAddContact({ id: nanoid(), ...values });
     resetForm();
   };
 
