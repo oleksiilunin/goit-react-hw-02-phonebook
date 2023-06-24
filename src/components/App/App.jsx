@@ -8,11 +8,11 @@ import { Filter } from 'components/Filter';
 import { ContactsList } from 'components/ContactsList';
 import { GlobalStyles } from 'components/GlobalStyles';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const notifyOptions = {
   position: 'top-center',
   autoClose: 3000,
-  transition: 'zoom',
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
@@ -46,7 +46,7 @@ class App extends Component {
           newContact.name.toLowerCase().trim() ||
         contact.number.trim() === newContact.number.trim()
     ).length
-      ? toast.error(`${newContact.name} is already in contacts`, notifyOptions)
+      ? toast.error(`${newContact.name}: is already in contacts`, notifyOptions)
       : this.setState(prevState => ({
           contacts: [...prevState.contacts, newContact].sort(
             (firstContact, secondContact) =>
@@ -55,6 +55,16 @@ class App extends Component {
                 .localeCompare(secondContact.name.toLowerCase())
           ),
         }));
+  };
+
+  deleteContact = id => {
+    const newContacts = this.state.contacts.filter(
+      contact => contact.id !== id
+    );
+    return this.setState({
+      contacts: newContacts,
+      filter: '',
+    });
   };
 
   getFilteredContacts = () => {
@@ -75,7 +85,10 @@ class App extends Component {
         </Section>
         <Section title="Contacts">
           <Filter state={this.state} onChangeInput={this.handleChangeInput} />
-          <ContactsList contacts={filteredContacts} />
+          <ContactsList
+            contacts={filteredContacts}
+            onDeleteContact={this.deleteContact}
+          />
         </Section>
 
         <GlobalStyles />
