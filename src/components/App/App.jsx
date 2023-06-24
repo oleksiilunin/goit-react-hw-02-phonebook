@@ -73,8 +73,7 @@ class App extends Component {
       </AppContainer>
     );
 
-    {
-      /* <h1>{title}</h1>
+    /* <h1>{title}</h1>
       <section>
         <form action=""></form>
       </section>
@@ -82,7 +81,6 @@ class App extends Component {
          <h2></h2>
          <ul></ul>
       </section>  */
-    }
 
     // <Phonebook>
     //   <Form>
