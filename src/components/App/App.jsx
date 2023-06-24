@@ -4,18 +4,22 @@ import { AppContainer } from './App.styled';
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { ContactForm } from 'components/ContactForm';
-import { Contacts } from 'components/Contacts';
+import { Filter } from 'components/Filter';
+import { ContactsList } from 'components/ContactsList';
 import { GlobalStyles } from 'components/GlobalStyles';
 import { nanoid } from 'nanoid';
 
-// import { nanoid } from 'nanoid/non-secure'
-// const id = nanoid() //=> "Uakgb_J5m9g-0JDMbcJqLJ"
-
 class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     name: '',
     number: '',
+    filter: '',
   };
 
   handleChangeInput = e => {
@@ -39,7 +43,16 @@ class App extends Component {
     console.log(this.state);
   };
 
+  getFilteredContacts = () => {
+    const { filter, contacts } = this.state;
+    const toLowerFilter = filter.toLocaleLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(toLowerFilter)
+    );
+  };
+
   render() {
+    const filteredContacts = this.getFilteredContacts();
     return (
       <AppContainer>
         <Header headerTitle="Phonebook" />
@@ -52,7 +65,8 @@ class App extends Component {
           />
         </Section>
         <Section title="Contacts">
-          <Contacts contacts={this.state.contacts} />
+          <Filter state={this.state} onChangeInput={this.handleChangeInput} />
+          <ContactsList contacts={filteredContacts} />
         </Section>
 
         <GlobalStyles />
