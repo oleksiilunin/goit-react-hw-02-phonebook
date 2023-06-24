@@ -1,9 +1,10 @@
 import { Global, css } from '@emotion/react';
+import fontStyles from '../css/fonts.css';
 
 const GlobalStyles = () => (
   <Global
     styles={css`
-      @import url('css/fonts.css');
+      ${fontStyles}
 
       *,
       *::before,
