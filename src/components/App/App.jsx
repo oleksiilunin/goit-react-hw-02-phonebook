@@ -7,7 +7,19 @@ import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactsList } from 'components/ContactsList';
 import { GlobalStyles } from 'components/GlobalStyles';
-import { nanoid } from 'nanoid';
+import { toast, ToastContainer } from 'react-toastify';
+
+const notifyOptions = {
+  position: 'top-center',
+  autoClose: 3000,
+  transition: 'zoom',
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: 'colored',
+};
 
 class App extends Component {
   state = {
@@ -17,8 +29,6 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
@@ -29,18 +39,22 @@ class App extends Component {
     });
   };
 
-  addContact = e => {
-    e.preventDefault();
-    const id = nanoid();
-    this.setState(prevState => ({
-      contacts: [
-        ...prevState.contacts,
-        { id: id, name: this.state.name, number: this.state.number },
-      ],
-      name: '',
-      number: '',
-    }));
-    console.log(this.state);
+  addContact = newContact => {
+    this.state.contacts.filter(
+      contact =>
+        contact.name.toLowerCase().trim() ===
+          newContact.name.toLowerCase().trim() ||
+        contact.number.trim() === newContact.number.trim()
+    ).length
+      ? toast.error(`${newContact.name} is already in contacts`, notifyOptions)
+      : this.setState(prevState => ({
+          contacts: [...prevState.contacts, newContact].sort(
+            (firstContact, secondContact) =>
+              firstContact.name
+                .toLowerCase()
+                .localeCompare(secondContact.name.toLowerCase())
+          ),
+        }));
   };
 
   getFilteredContacts = () => {
@@ -57,12 +71,7 @@ class App extends Component {
       <AppContainer>
         <Header headerTitle="Phonebook" />
         <Section>
-          <ContactForm
-            stateName={this.state.name}
-            stateNumber={this.state.number}
-            onChangeInput={this.handleChangeInput}
-            onSubmit={this.addContact}
-          />
+          <ContactForm onAddContact={this.addContact} />
         </Section>
         <Section title="Contacts">
           <Filter state={this.state} onChangeInput={this.handleChangeInput} />
@@ -70,6 +79,7 @@ class App extends Component {
         </Section>
 
         <GlobalStyles />
+        <ToastContainer />
       </AppContainer>
     );
 
