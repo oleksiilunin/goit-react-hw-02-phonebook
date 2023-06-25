@@ -76,6 +76,7 @@ class App extends Component {
   };
 
   render() {
+    const { filter } = this.state;
     const filteredContacts = this.getFilteredContacts();
     return (
       <AppContainer>
@@ -84,7 +85,7 @@ class App extends Component {
           <ContactForm onAddContact={this.addContact} />
         </Section>
         <Section title="Contacts">
-          <Filter state={this.state} onChangeInput={this.handleChangeInput} />
+          <Filter filterValue={filter} onChangeInput={this.handleChangeInput} />
           <ContactsList
             contacts={filteredContacts}
             onDeleteContact={this.deleteContact}
