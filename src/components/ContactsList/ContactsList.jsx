@@ -1,3 +1,5 @@
+import { FiUserMinus } from 'react-icons/fi';
+
 const ContactsList = ({ contacts, onDeleteContact }) => {
   const sortedList = contacts.sort((firstContact, secondContact) =>
     firstContact.name
@@ -12,6 +14,7 @@ const ContactsList = ({ contacts, onDeleteContact }) => {
             {name}: <span>{number}</span>
           </p>
           <button type="button" onClick={() => onDeleteContact(id)}>
+            <FiUserMinus />
             Delete
           </button>
         </li>

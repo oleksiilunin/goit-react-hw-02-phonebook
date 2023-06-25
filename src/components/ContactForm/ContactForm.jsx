@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { FiPhone, FiUserPlus, FiUser } from 'react-icons/fi';
 import { nanoid } from 'nanoid';
 import * as yup from 'yup';
 
@@ -40,6 +41,7 @@ const ContactForm = ({ onAddContact }) => {
     >
       <Form autoComplete="off">
         <label>
+          <FiUser />
           Name
           <Field
             type="text"
@@ -47,12 +49,12 @@ const ContactForm = ({ onAddContact }) => {
             maxLength="32"
             pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            autoFocus
             required
           />
           <ErrorMessage name="name" />
         </label>
         <label>
+          <FiPhone />
           Number
           <Field
             type="tel"
@@ -60,12 +62,14 @@ const ContactForm = ({ onAddContact }) => {
             maxLength="28"
             pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            autoFocus
             required
           />
           <ErrorMessage name="number" />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit">
+          <FiUserPlus />
+          Add contact
+        </button>
       </Form>
     </Formik>
   );
