@@ -1,14 +1,19 @@
 import React from 'react';
 import { FiSearch } from 'react-icons/fi';
 
+import { Label, LabelWrapper, Input } from './Filter.styled';
+
 import PropTypes from 'prop-types';
 
 const Filter = ({ filterValue, onChangeInput }) => {
   return (
-    <label>
-      <FiSearch />
-      Find contacts by name
-      <input
+    <Label>
+      <LabelWrapper>
+        <FiSearch size="20" />
+        Find contacts by name
+      </LabelWrapper>
+
+      <Input
         type="text"
         name="filter"
         value={filterValue}
@@ -18,7 +23,7 @@ const Filter = ({ filterValue, onChangeInput }) => {
         required
         onChange={onChangeInput}
       />
-    </label>
+    </Label>
   );
 };
 
