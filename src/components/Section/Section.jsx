@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { SectionTitle } from './Section.styled';
-import { SectionWrapper } from './Section.styled';
+import { SectionTitle, SectionWrapper } from './Section.styled';
 
 const Section = ({ title, children }) => (
   <SectionWrapper>
