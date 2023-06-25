@@ -15,7 +15,7 @@ export const Item = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 48px;
+  gap: 42px;
   width: 100%;
   /* max-width: 480px; */
 `;
@@ -23,9 +23,9 @@ export const Item = styled.li`
 export const ItemWrapper = styled.p`
   display: flex;
   gap: 36px;
-  max-width: 320px;
+  /* max-width: 320px; */
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 `;
 
 export const DeleteButton = styled.button`
